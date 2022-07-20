@@ -15,8 +15,8 @@
             <input type="number" name="price" class="form-control" id="price" min="0">
         </div>
         <div class="mb-3">
-            <label for="barcode" class="form-label">Código de Barras</label>
-            <input type="number" name="barcode" class="form-control" id="barcode" min="0">
+            <label for="barCode" class="form-label">Código de Barras</label>
+            <input type="number" name="barCode" class="form-control" id="barCode" min="0">
         </div>
         <button class="btn btn-primary" type="submit">Cadastrar</button>
     </form>

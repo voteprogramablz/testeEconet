@@ -38,6 +38,15 @@
     @if (session('success'))
         <div class="alert alert-success w-75 p-3 mt-6 mx-auto rounded">{{ session('success') }}</div>
     @endif
+    @if (count($errors) > 0)
+        <div class="alert alert-danger  w-75 p-3 mt-6 mx-auto rounded">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="w-75 p-3 mx-auto rounded" style="background-color: #eee;">
         @yield('content')
     </div>

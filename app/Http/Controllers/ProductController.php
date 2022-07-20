@@ -36,7 +36,6 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        dd($request->validated());
         Product::create($request->validated());
 
         return redirect()->back()->with("success", "Produto cadastrado com sucesso!");

@@ -13,6 +13,7 @@ class Product extends Model
         'title',
         'price',
         'stock',
+        "barCode"
     ];
 
     protected $hidden = [
