@@ -14,13 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->decimal('price', 10, 2)->default(0);
-            $table->integer('stock');
-            $table->integer('barCode')->unique();
+            $table->integer('quantity');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign("product_id")->references("id")->on("products");
+            $table->unsignedBigInteger('client_id');
+            $table->foreign("client_id")->references("id")->on("clients");
+            $table->enum("status", ["1,2,3"]); // 1 - aberto, 2 - pago, 3 - cancelado
             $table->timestamps();
         });
     }
