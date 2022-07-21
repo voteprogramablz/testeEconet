@@ -15,7 +15,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view("client.create");
+        $clients = Client::orderBy("name")->paginate(10);
+        return view("client.index", compact("clients"));
     }
 
     /**
@@ -25,7 +26,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view("client.create");
     }
 
     /**
@@ -37,7 +38,7 @@ class ClientController extends Controller
     public function store(ClientStoreRequest $request)
     {
         Client::create($request->validated());
-        return redirect()->back()->with("success", "Cliente cadastrado com sucesso!");
+        return redirect("/clientes")->with("success", "Cliente cadastrado com sucesso!");
     }
 
     /**
@@ -46,9 +47,11 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        if (empty($client))
+            redirect()->back()->withErrors("Cliente não encontrado");
     }
 
     /**
@@ -80,8 +83,21 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    public function destroy($id)
     {
-        //
+        Client::findOrFail($id)->delete();
+        return redirect()->back()->with("success", "Cliente excluído com sucesso");
+    }
+
+    public function search(Request $request)
+    {
+        $filters = $request->except('_token');
+        $clients = Client::where("name", "LIKE", "%{$request->search}%")
+            ->orWhere("email", "LIKE", "%{$request->search}%")
+            ->orWhere("cpf", "LIKE", "%{$request->search}%")
+            ->orderBy("name")
+            ->paginate();
+
+        return view("client.index", compact("clients", "filters"));
     }
 }
