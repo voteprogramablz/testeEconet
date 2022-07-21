@@ -26,7 +26,8 @@ class ProductStoreRequest extends FormRequest
         return [
             "title" => "required",
             "price" => "required|integer",
-            "barCode" => "required|integer"
+            "barCode" => "required|integer",
+            "stock" => "nullable"
         ];
     }
 }

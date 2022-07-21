@@ -15,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view("product.create");
+        $products = Product::orderBy("title")->paginate(5);
+
+        return view("product.index", compact("products"));
     }
 
     /**
@@ -25,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view("product.create");
     }
 
     /**
@@ -38,7 +40,7 @@ class ProductController extends Controller
     {
         Product::create($request->validated());
 
-        return redirect()->back()->with("success", "Produto cadastrado com sucesso!");
+        return redirect("/produtos")->with("success", "Produto cadastrado com sucesso!");
     }
 
     /**
@@ -81,8 +83,21 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::findOrFail($id)->delete();
+        return redirect()->back()->with("success", "Produto excluído com sucesso");
+    }
+
+    public function search(Request $request)
+    {
+        $filters = $request->except('_token');
+        $products = Product::where("title", "LIKE", "%{$request->search}%")
+            ->orWhere("price", "LIKE", "%{$request->search}%")
+            ->orWhere("stock", "LIKE", "%{$request->search}%")
+            ->orderBy("title")
+            ->paginate(5);
+
+        return view("product.index", compact("products", "filters"));
     }
 }

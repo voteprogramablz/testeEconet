@@ -19,6 +19,10 @@
                 <label for="barCode" class="form-label">Código de Barras</label>
                 <input type="number" name="barCode" class="form-control" id="barCode" min="0">
             </div>
+            <div class="mb-3">
+                <label for="stock" class="form-label">Quantidade em estoque</label>
+                <input type="number" name="stock" class="form-control" id="stock" min="0">
+            </div>
             <button class="btn btn-primary" type="submit">Cadastrar</button>
         </form>
     </div>

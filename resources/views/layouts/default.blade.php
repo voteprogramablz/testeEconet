@@ -29,7 +29,10 @@
                         <a class="nav-link active" aria-current="page" href="/clientes">Clientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/produtos/cadastro">Produtos</a>
+                        <a class="nav-link" href="/produtos">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pedidos">Pedidos</a>
                     </li>
                 </ul>
             </div>
@@ -48,7 +51,7 @@
             </ul>
         </div>
     @endif
-        @yield('content')
+    @yield('content')
     </div>
 </body>
 
