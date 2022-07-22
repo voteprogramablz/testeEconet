@@ -21,7 +21,8 @@ return new class extends Migration
             $table->foreign("product_id")->references("id")->on("products");
             $table->unsignedBigInteger('client_id');
             $table->foreign("client_id")->references("id")->on("clients");
-            $table->enum("status", ["1,2,3"]); // 1 - aberto, 2 - pago, 3 - cancelado
+            $table->unsignedBigInteger("order_status_id"); // 1 - aberto, 2 - pago, 3 - cancelado
+            $table->foreign("order_status_id")->references("id")->on("order_statuses");
             $table->timestamps();
         });
     }

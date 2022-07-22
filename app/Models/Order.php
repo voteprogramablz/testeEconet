@@ -36,4 +36,16 @@ class Order extends Model
     {
         return $this->hasOne(Product::class, "id", "product_id")->withTrashed();
     }
+
+    public static function filter($search)
+    {
+        return Self::with(["client", "product"])
+            ->whereHas("client", function ($query) use ($search) {
+                return $query->where("name", "LIKE", "%{$search}%");
+            })
+            ->orWhereHas("product", function ($query) use ($search) {
+                return $query->where("title", "LIKE", "%{$search}%");
+            })
+            ->orderBy("id");
+    }
 }

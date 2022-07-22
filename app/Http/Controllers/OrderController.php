@@ -65,7 +65,6 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
     }
 
     /**
@@ -96,15 +95,8 @@ class OrderController extends Controller
     public function search(Request $request)
     {
         $filters = $request->except('_token');
-        $orders = Order::with(["client", "product"])
-            ->whereHas("client", function ($query) use ($request) {
-                return $query->where("name", "LIKE", "%{$request->search}%");
-            })
-            ->orWhereHas("product", function ($query) use ($request) {
-                return $query->where("title", "LIKE", "%{$request->search}%");
-            })
-            ->orderBy("id")
-            ->paginate(20);
+
+        $orders = Order::filter($request->search)->paginate(20);
 
         return view("order.index", compact("orders", "filters"));
     }

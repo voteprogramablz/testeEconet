@@ -12,7 +12,6 @@ Route::get('/', function () {
 Route::controller(ClientController::class)->prefix("clientes")->group(function () {
     Route::get("/", 'index')->name("client.index");
     Route::get("/cadastro", 'create')->name("client.create");
-    Route::get("/visualizar/{id}", 'show')->name("client.show");
     Route::get("/visualizar/{id}", 'edit')->name("client.edit");
     Route::post("/cadastro", 'store')->name("client.store");
     Route::delete("/delete/{id}", 'destroy')->name("client.destroy");
@@ -27,8 +26,7 @@ Route::controller(ProductController::class)->prefix("produtos")->group(function 
     Route::post("/cadastro", 'store')->name("product.store");
 
     Route::get("/cadastro", 'create')->name("product.create");
-    Route::get("/visualizar/{id}", 'show')->name("product.show");
-    Route::get("/visualizar/{id}", 'edit')->name("product.edit");
+    Route::get("/visualizar/{product}", 'edit')->name("product.edit");
     Route::delete("/delete/{id}", 'destroy')->name("product.destroy");
 
     Route::patch("/atualizar/{id}", "update")->name("product.update");
@@ -41,7 +39,6 @@ Route::controller(OrderController::class)->prefix("pedidos")->group(function () 
     Route::post("/cadastro", 'store')->name("order.store");
 
     Route::get("/cadastro", 'create')->name("order.create");
-    Route::get("/visualizar/{id}", 'show')->name("order.show");
     Route::get("/visualizar/{id}", 'edit')->name("order.edit");
     Route::delete("/delete/{order}", 'destroy')->name("order.destroy");
 
