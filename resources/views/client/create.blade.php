@@ -17,7 +17,7 @@
             </div>
             <div class="mb-3">
                 <label for="cpf" class="form-label">CPF</label>
-                <input type="cpf" name="cpf" class="form-control" id="cpf">
+                <input type="cpf" name="cpf" class="form-control" id="cpf" max="15">
             </div>
             <button class="btn btn-primary" type="submit">Cadastrar</button>
         </form>

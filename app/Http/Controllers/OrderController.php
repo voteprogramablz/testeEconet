@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderStoreRequest;
+use App\Models\Client;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy("id")->paginate(10);
+        $orders = Order::with(["client", "product"])->orderBy("id")->paginate(20);
         return view("order.index", compact("orders"));
     }
 
@@ -25,7 +28,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::orderBy("name")->get();
+        $products = Product::orderBy("title")->where("stock", ">", "0")->get();
+        return view("order.create", compact("clients", "products"));
     }
 
     /**
@@ -34,9 +39,11 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderStoreRequest $request)
     {
-        //
+        Order::create($request->validated());
+
+        return redirect("pedidos")->with("success", "Pedido cadastrado com sucesso!");
     }
 
     /**
@@ -81,6 +88,24 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        return redirect("pedidos")->with("success", "Produto excluído com sucesso!");
+    }
+
+    public function search(Request $request)
+    {
+        $filters = $request->except('_token');
+        $orders = Order::with(["client", "product"])
+            ->whereHas("client", function ($query) use ($request) {
+                return $query->where("name", "LIKE", "%{$request->search}%");
+            })
+            ->orWhereHas("product", function ($query) use ($request) {
+                return $query->where("title", "LIKE", "%{$request->search}%");
+            })
+            ->orderBy("id")
+            ->paginate(20);
+
+        return view("order.index", compact("orders", "filters"));
     }
 }

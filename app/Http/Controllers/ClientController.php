@@ -15,7 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy("name")->paginate(10);
+        $clients = Client::orderBy("name")->paginate(20);
         return view("client.index", compact("clients"));
     }
 
@@ -37,7 +37,7 @@ class ClientController extends Controller
      */
     public function store(ClientStoreRequest $request)
     {
-        Client::create($request->validated());
+        Client::insert($request->validated());
         return redirect("/clientes")->with("success", "Cliente cadastrado com sucesso!");
     }
 
@@ -74,12 +74,9 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClientStoreRequest $request)
     {
-        $client = Client::findOrFail($id);
-
-        $client->update($request->all());
-
+        Client::findOrFail($request->id)->update($request->all());
         return redirect()->back()->with("success", "Cliente atualizado com sucesso!");
     }
 
@@ -102,7 +99,7 @@ class ClientController extends Controller
             ->orWhere("email", "LIKE", "%{$request->search}%")
             ->orWhere("cpf", "LIKE", "%{$request->search}%")
             ->orderBy("name")
-            ->paginate();
+            ->paginate(20);
 
         return view("client.index", compact("clients", "filters"));
     }

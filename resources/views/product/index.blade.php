@@ -39,7 +39,7 @@
                         {{ $product->title }}
                     </td>
                     <td class="col-sm text-center">
-                        R$ {{ $product->price }}
+                        R$ {{ $product->price_formated }}
                     </td>
                     <td class="col-sm text-center">
                         {{ $product->stock }}

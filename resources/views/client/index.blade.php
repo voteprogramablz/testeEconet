@@ -42,7 +42,7 @@
                         {{ $client->email }}
                     </td>
                     <td class="col-sm text-center">
-                        {{ $client->cpf }}
+                        {{ $client->cpf_formated }}
                     </td>
                     <td class="d-flex col-sm text-center">
                         <form method="post" action="/clientes/delete/{{ $client->id }}">

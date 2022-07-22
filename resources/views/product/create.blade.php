@@ -13,11 +13,11 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Preço unitário</label>
-                <input type="number" name="price" class="form-control" id="price" min="0">
+                <input type="number" name="price" class="form-control" id="price" min="1">
             </div>
             <div class="mb-3">
                 <label for="barCode" class="form-label">Código de Barras</label>
-                <input type="number" name="barCode" class="form-control" id="barCode" min="0">
+                <input type="number" name="barCode" class="form-control" id="barCode" min="1">
             </div>
             <div class="mb-3">
                 <label for="stock" class="form-label">Quantidade em estoque</label>

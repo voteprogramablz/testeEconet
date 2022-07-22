@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy("title")->paginate(5);
+        $products = Product::orderBy("title")->paginate(20);
 
         return view("product.index", compact("products"));
     }
@@ -96,7 +96,7 @@ class ProductController extends Controller
             ->orWhere("price", "LIKE", "%{$request->search}%")
             ->orWhere("stock", "LIKE", "%{$request->search}%")
             ->orderBy("title")
-            ->paginate(5);
+            ->paginate(20);
 
         return view("product.index", compact("products", "filters"));
     }

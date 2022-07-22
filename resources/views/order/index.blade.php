@@ -22,13 +22,13 @@
                 @if ($loop->first)
                     <tr class="row fs-5 mb-3">
                         <th class="col-sm text-center">
-                            Nome
+                            Cliente
                         </th>
                         <th class="col-sm text-center">
-                            Email
+                            Produto
                         </th>
                         <th class="col-sm text-center">
-                            CPF
+                            Quantidade
                         </th>
                         <th class="col-sm text-center">
                         </th>
@@ -36,13 +36,13 @@
                 @endif
                 <tr class="row pb-2 pt-2 border-bottom border-bottom-1 border-gray-900">
                     <td class="col-sm">
-                        {{ $order->name }}
+                        {{ $order->client->name }}
                     </td>
                     <td class="col-sm">
-                        {{ $order->email }}
+                        {{ $order->product->title }}
                     </td>
                     <td class="col-sm text-center">
-                        {{ $order->cpf }}
+                        {{ $order->quantity }}
                     </td>
                     <td class="d-flex col-sm text-center">
                         <form method="post" action="/pedidos/delete/{{ $order->id }}">
@@ -52,7 +52,7 @@
                                     class="fas fa-trash me-3 "></i>Deletar</button>
                         </form>
                         <button class="btn btn-primary "><a class="text-light"
-                                href="/pedidos/visualizar/{{ $client->id }}"><i
+                                href="/pedidos/visualizar/{{ $order->id }}"><i
                                     class="fas fa-edit text-light me-2"></i>Editar</a></button>
                     </td>
                 </tr>

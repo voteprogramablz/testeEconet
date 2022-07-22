@@ -22,7 +22,7 @@ class ClientFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->safeEmail(),
-            'cpf' => fake()->cpf(),
+            'cpf' => preg_replace("/\D/", '', fake()->cpf()),
         ];
     }
 }

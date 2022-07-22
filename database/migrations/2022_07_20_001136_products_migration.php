@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('stock')->default(0);
             $table->integer('barCode')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

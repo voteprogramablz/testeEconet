@@ -18,7 +18,7 @@
             </div>
             <div class="mb-3">
                 <label for="cpf" class="form-label">CPF</label>
-                <input type="text" name="cpf" class="form-control" id="cpf" value="{{ $client->cpf }}">
+                <input type="text" name="cpf" class="form-control" id="cpf" value="{{ $client->cpf }}" maxlength="14" >
             </div>
             <button class="btn btn-primary" type="submit">Atualizar</button>
         </form>

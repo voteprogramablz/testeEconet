@@ -23,8 +23,8 @@ Route::controller(ClientController::class)->prefix("clientes")->group(function (
 });
 
 Route::controller(ProductController::class)->prefix("produtos")->group(function () {
-    Route::get("/", 'index');
-    Route::post("/cadastro", 'store');
+    Route::get("/", 'index')->name("product.index");
+    Route::post("/cadastro", 'store')->name("product.store");
 
     Route::get("/cadastro", 'create')->name("product.create");
     Route::get("/visualizar/{id}", 'show')->name("product.show");
@@ -37,13 +37,13 @@ Route::controller(ProductController::class)->prefix("produtos")->group(function 
 });
 
 Route::controller(OrderController::class)->prefix("pedidos")->group(function () {
-    Route::get("/", 'index');
-    Route::post("/cadastro", 'store');
+    Route::get("/", 'index')->name("order.index");
+    Route::post("/cadastro", 'store')->name("order.store");
 
     Route::get("/cadastro", 'create')->name("order.create");
     Route::get("/visualizar/{id}", 'show')->name("order.show");
     Route::get("/visualizar/{id}", 'edit')->name("order.edit");
-    Route::delete("/delete/{id}", 'destroy')->name("order.destroy");
+    Route::delete("/delete/{order}", 'destroy')->name("order.destroy");
 
     Route::patch("/atualizar/{id}", "update")->name("order.update");
 
