@@ -72,9 +72,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductStoreRequest $request)
     {
-        //
+        Product::find($request->id)->update($request->validated());
+
+        return redirect("/produtos")->with("success", "Produto atualizado com sucesso!");
     }
 
     /**

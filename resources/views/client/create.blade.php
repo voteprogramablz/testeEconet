@@ -19,7 +19,8 @@
                 <label for="cpf" class="form-label">CPF</label>
                 <input type="cpf" name="cpf" class="form-control" id="cpf" max="15">
             </div>
-            <button class="btn btn-primary" type="submit">Cadastrar</button>
+            <button class="d-block btn btn-primary" type="submit">Cadastrar</button>
         </form>
     </div>
+    {{-- <script src="{{ asset('js/formValidate.js') }}"></script> --}}
 @endsection

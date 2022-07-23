@@ -31,6 +31,9 @@
                             Quantidade
                         </th>
                         <th class="col-sm text-center">
+                            Status
+                        </th>
+                        <th class="col-sm text-center">
                         </th>
                     </tr>
                 @endif
@@ -38,11 +41,14 @@
                     <td class="col-sm">
                         {{ $order->client->name }}
                     </td>
-                    <td class="col-sm">
+                    <td class="col-sm text-center">
                         {{ $order->product->title }}
                     </td>
                     <td class="col-sm text-center">
                         {{ $order->quantity }}
+                    </td>
+                    <td class="col-sm text-center">
+                        {{ $order->status_title }}
                     </td>
                     <td class="d-flex col-sm text-center">
                         <form method="post" action="/pedidos/delete/{{ $order->id }}">

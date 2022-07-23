@@ -86,9 +86,9 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        Client::findOrFail($id)->delete();
+        $client->delete();
         return redirect()->back()->with("success", "Cliente excluído com sucesso");
     }
 

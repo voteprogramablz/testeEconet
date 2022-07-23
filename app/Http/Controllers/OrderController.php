@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderStoreRequest;
 use App\Models\Client;
 use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -41,6 +42,20 @@ class OrderController extends Controller
      */
     public function store(OrderStoreRequest $request)
     {
+        // Sei que a lógica disso ficou errada, o correto seria descontar o estoque do produto quando o pedido fosse pago, porém a lógica de pagamento não está definida pra ativar a trigger do "débito" no estoque, então deixei assim.
+
+        $orderWithSelectedProduct = Order::where("product_id",  $request->product_id)->get();
+        $stockOfProductsSelected = Product::find($request->product_id)->value("stock");
+        $productsAvailableAfterPurchase = 1;
+
+        if (count($orderWithSelectedProduct) > 0 && $stockOfProductsSelected !== 0) {
+            $selectedProductsPurchased = $orderWithSelectedProduct->pluck("quantity")->sum();
+
+            $productsAvailableAfterPurchase =  $stockOfProductsSelected - $selectedProductsPurchased;
+        }
+        if ($productsAvailableAfterPurchase <= 0 || $stockOfProductsSelected === 0) {
+            return redirect("pedidos")->withErrors("Quantidade de produtos insuficiente no estoque.");
+        };
         Order::create($request->validated());
 
         return redirect("pedidos")->with("success", "Pedido cadastrado com sucesso!");
@@ -65,6 +80,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
+        $orderStatuses = OrderStatus::get();
+        return view("order.edit", compact("order", "orderStatuses"));
     }
 
     /**
@@ -76,7 +93,9 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->update($request->all());
+
+        return redirect("/pedidos")->with("success", "Pedido atualizado com sucesso!");
     }
 
     /**

@@ -48,12 +48,12 @@
                         <form method="post" action="/clientes/delete/{{ $client->id }}">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger delete-btn me-4" type="submit"><i
-                                    class="fas fa-trash me-3 "></i>Deletar</button>
+                            <button class="text-center btn btn-danger delete-btn me-4" type="submit"><i
+                                    class="fas fa-trash  "></i></button>
                         </form>
-                        <button class="btn btn-primary "><a class="text-light"
+                        <button class="btn btn-primary me-4 "><a class="text-light"
                                 href="/clientes/visualizar/{{ $client->id }}"><i
-                                    class="fas fa-edit text-light me-2"></i>Editar</a></button>
+                                    class="fas fa-edit text-light "></i></a></button>
                     </td>
                 </tr>
             @empty

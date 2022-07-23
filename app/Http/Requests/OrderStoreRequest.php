@@ -27,7 +27,7 @@ class OrderStoreRequest extends FormRequest
             "quantity" => "required|integer",
             "product_id" => "required|integer",
             "client_id" => "required|integer",
-            "status" => "required|integer"
+            "order_status_id" => "required|integer"
         ];
     }
 }

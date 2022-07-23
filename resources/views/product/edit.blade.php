@@ -14,7 +14,7 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Preço</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ $product->price }}"
+                <input type="number" name="text" class="form-control" id="price" value="{{ $product->price }}"
                     maxlength="14">
             </div>
             <div class="mb-3">

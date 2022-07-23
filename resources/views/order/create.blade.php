@@ -35,7 +35,7 @@
                 <label for="quantity" class="form-label mt-3">Quantidade</label>
                 <input min="1" type="number" name="quantity" class="form-control" id="quantity" value="1">
             </div>
-            <input type="hidden" name="status" id="status" value="1">
+            <input type="hidden" name="order_status_id" id="order_status_id" value="1">
             <button class="btn btn-primary" type="submit">Solicitar</button>
         </form>
     </div>

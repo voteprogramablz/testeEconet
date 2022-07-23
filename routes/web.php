@@ -12,37 +12,41 @@ Route::get('/', function () {
 Route::controller(ClientController::class)->prefix("clientes")->group(function () {
     Route::get("/", 'index')->name("client.index");
     Route::get("/cadastro", 'create')->name("client.create");
-    Route::get("/visualizar/{id}", 'edit')->name("client.edit");
-    Route::post("/cadastro", 'store')->name("client.store");
-    Route::delete("/delete/{id}", 'destroy')->name("client.destroy");
+    Route::get("/visualizar/{client}", 'edit')->name("client.edit");
 
-    Route::patch("/atualizar/{id}", "update")->name("client.update");
+    Route::post("/cadastro", 'store')->name("client.store");
+
+    Route::delete("/delete/{client}", 'destroy')->name("client.destroy");
+
+    Route::patch("/atualizar/{client}", "update")->name("client.update");
 
     Route::any("/search", "search")->name("client.search");
 });
 
 Route::controller(ProductController::class)->prefix("produtos")->group(function () {
     Route::get("/", 'index')->name("product.index");
-    Route::post("/cadastro", 'store')->name("product.store");
-
     Route::get("/cadastro", 'create')->name("product.create");
     Route::get("/visualizar/{product}", 'edit')->name("product.edit");
-    Route::delete("/delete/{id}", 'destroy')->name("product.destroy");
 
-    Route::patch("/atualizar/{id}", "update")->name("product.update");
+    Route::post("/cadastro", 'store')->name("product.store");
+
+    Route::delete("/delete/{order}", 'destroy')->name("product.destroy");
+
+    Route::patch("/atualizar/{order}", "update")->name("product.update");
 
     Route::any("/search", "search")->name("product.search");
 });
 
 Route::controller(OrderController::class)->prefix("pedidos")->group(function () {
     Route::get("/", 'index')->name("order.index");
+    Route::get("/cadastro", 'create')->name("order.create");
+    Route::get("/visualizar/{order}", 'edit')->name("order.edit");
+
     Route::post("/cadastro", 'store')->name("order.store");
 
-    Route::get("/cadastro", 'create')->name("order.create");
-    Route::get("/visualizar/{id}", 'edit')->name("order.edit");
     Route::delete("/delete/{order}", 'destroy')->name("order.destroy");
 
-    Route::patch("/atualizar/{id}", "update")->name("order.update");
+    Route::patch("/atualizar/{order}", "update")->name("order.update");
 
     Route::any("/search", "search")->name("order.search");
 });
